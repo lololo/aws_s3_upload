@@ -26,6 +26,7 @@ class AwsS3 {
 
     /// The file to upload
     required File file,
+    String? endpoint,
 
     /// The key to save this file as. Will override destDir and filename if set.
     String? key,
@@ -56,7 +57,9 @@ class AwsS3 {
     if (useSSL) {
       httpStr += 's';
     }
-    final endpoint = '$httpStr://$bucket.s3.$region.amazonaws.com';
+    if (endpoint == null) {
+      endpoint = '$httpStr://$bucket.s3.$region.amazonaws.com';
+    }
 
     String? uploadKey;
 
